@@ -14,6 +14,12 @@
   color: white;
 }
 
+.gameOver {
+  background-color: rgb(230, 230, 127);
+  color: black;
+  
+}
+
 .grid {
   border: #cecece solid 1px;
   border-spacing: 1px;
@@ -40,5 +46,14 @@
   width: 50px;
   background-color: #282c34;
   color: #df1fbf
+}
 
+.reset {
+  margin-top: 10px;
+  width: 150px;
+}
+
+.game-status {
+  color: red;
+  -webkit-text-stroke: 1px white;
 }
