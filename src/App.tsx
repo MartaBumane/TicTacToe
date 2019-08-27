@@ -52,7 +52,8 @@ const App: React.FC = () => {
 
 
     if (isGameOver(field)){
-      if (isGameOver(field)!=='Game Over'){
+      console.log(isGameOver(field));
+      if (isGameOver(field)!=='Game Over, try again!'){
         gameStatus = activePlayer + ' '+isGameOver(field)+ ", "+ activePlayer +' wins!';
       }else{
         gameStatus = isGameOver(field);
