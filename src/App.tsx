@@ -70,9 +70,9 @@ const App: React.FC = () => {
     for (let i = 0; i < 9; i+=3) {
       let children = [];
       for (let j = i; j < i+3;j++) {
-        children.push(<td className="grid" ><button disabled = {setDisability(field, j)} onClick={() => changeStatus(j)} className={buttonClass(j)}>{field[j].value}</button></td>)
+        children.push(<td key = {`${i}${j}`} className="grid" ><button disabled = {setDisability(field, j)} onClick={() => changeStatus(j)} className={buttonClass(j)}>{field[j].value}</button></td>)
       }
-      table.push(<tr>{children}</tr>);
+      table.push(<tr key = {i}>{children}</tr>);
     }
     return table;
   }
