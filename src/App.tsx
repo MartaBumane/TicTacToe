@@ -1,102 +1,107 @@
-import React, {useState} from 'react';
-import './App.css';
-import {isGameOver, grid, changePlayer, setDisability} from './Tic-Tac-toe'
-import {GridItem} from './interface'
+import React, { useState } from "react";
+import "./App.css";
+import { isGameOver, grid, changePlayer, setDisability } from "./Tic-Tac-toe";
+import { GridItem } from "./interface";
 
-let activePlayer = 'O';
-let gameStatus = '';
+let activePlayer = "O";
+let gameStatus = "";
 
 const App: React.FC = () => {
-
-  const [field, setField] = useState<GridItem[]>(grid); 
-  const [gameOver, setGameOver] = useState<boolean>(false); 
+  const [field, setField] = useState<GridItem[]>(grid);
+  const [gameOver, setGameOver] = useState<boolean>(false);
 
   const reset = (): any => {
-    let cleanedGrid: GridItem[]=[];    
-    for(let i = 1;i<=9;i++){
-      cleanedGrid.push({value: '', isClicked: false});
+    let cleanedGrid: GridItem[] = [];
+    for (let i = 1; i <= 9; i++) {
+      cleanedGrid.push({ value: "", isClicked: false });
     }
     setField(cleanedGrid);
-    setGameOver(false); 
-    gameStatus = '';   
+    setGameOver(false);
+    gameStatus = "";
   };
 
-
-  if(gameOver){
-    for(let i = 0; i<field.length;i++){
-      field[i].isClicked= true;
+  if (gameOver) {
+    for (let i = 0; i < field.length; i++) {
+      field[i].isClicked = true;
     }
   }
 
-  function buttonClass(j: number): any{
-    if(field[j].isClicked){
-      if(field[j].value==='o'||field[j].value==='O')
-        return 'O';
-      if(field[j].value==='x'||field[j].value==='X'){
-        return 'X';
-      }else{
-        return 'button'
+  function buttonClass(j: number): any {
+    if (field[j].isClicked) {
+      if (field[j].value === "o" || field[j].value === "O") return "O";
+      if (field[j].value === "x" || field[j].value === "X") {
+        return "X";
+      } else {
+        return "button";
       }
-    }else{
-      return 'button';
-
+    } else {
+      return "button";
     }
   }
 
-
-  function changeStatus(j: number): void{
-    field[j].isClicked= true;
+  function changeStatus(j: number): void {
+    field[j].isClicked = true;
     activePlayer = changePlayer(activePlayer);
     field[j].value = activePlayer;
     setField([...field]);
 
-
-    if (isGameOver(field)){
-      if (isGameOver(field)!=='Game Over, try again!'){
-        gameStatus = activePlayer + ' '+isGameOver(field)+ ", "+ activePlayer +' wins!';
-      }else{
+    if (isGameOver(field)) {
+      if (isGameOver(field) !== "Game Over, try again!") {
+        gameStatus =
+          activePlayer +
+          " " +
+          isGameOver(field) +
+          ", " +
+          activePlayer +
+          " wins!";
+      } else {
         gameStatus = isGameOver(field);
       }
       setGameOver(true);
       return;
     }
-    
   }
 
   function createTable() {
-    let table = []
+    let table = [];
 
-    for (let i = 0; i < 9; i+=3) {
+    for (let i = 0; i < 9; i += 3) {
       let children = [];
-      for (let j = i; j < i+3;j++) {
-        children.push(<td key = {`${i}${j}`} className="grid" ><button disabled = {setDisability(field, j)} onClick={() => changeStatus(j)} className={buttonClass(j)}>{field[j].value}</button></td>)
+      for (let j = i; j < i + 3; j++) {
+        children.push(
+          <td key={`${i}${j}`} className="grid">
+            <button
+              disabled={setDisability(field, j)}
+              onClick={() => changeStatus(j)}
+              className={buttonClass(j)}
+            >
+              {field[j].value}
+            </button>
+          </td>
+        );
       }
-      table.push(<tr key = {i}>{children}</tr>);
+      table.push(<tr key={i}>{children}</tr>);
     }
     return table;
   }
-  function gameStatusForH3(): string {   
-
+  function gameStatusForH3(): string {
     return gameStatus;
-
   }
 
   return (
-    <div className={`App ${gameOver ? 'gameOver': ''}`}>
+    <div className={`App ${gameOver ? "gameOver" : ""}`}>
       <header className="App-header">
-      <h1>Tic Tac Toe</h1>
-      <table >
-        <tbody>   
-          {createTable()}
-
-        </tbody>
-      </table>
-        <h3 className= 'game-status'>{gameStatusForH3()}</h3>
-        <button className='reset' onClick={() => reset()}>Reset</button>
+        <h1>Tic Tac Toe</h1>
+        <table>
+          <tbody>{createTable()}</tbody>
+        </table>
+        <h3 className="game-status">{gameStatusForH3()}</h3>
+        <button className="reset" onClick={() => reset()}>
+          Reset
+        </button>
       </header>
-      
     </div>
   );
-}
+};
 
 export default App;

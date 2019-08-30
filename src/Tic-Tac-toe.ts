@@ -76,7 +76,8 @@ export function isGameOver(field:GridItem[]): any{
 }
 
 export function setDisability(field:GridItem[], j:number){
-    if(field[j].isClicked){
+    if(field[j].isClicked)  
+    {
       return true;
     }else{
       return false;
