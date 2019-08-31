@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import { isGameOver, grid, changePlayer, setDisability } from "./Tic-Tac-toe";
+import { isGameOver, grid, changePlayer, setDisability, gameOverStatus} from "./Tic-Tac-toe";
 import { GridItem } from "./interface";
 
 let activePlayer = "O";
@@ -46,16 +46,16 @@ const App: React.FC = () => {
     setField([...field]);
 
     if (isGameOver(field)) {
-      if (isGameOver(field) !== "Game Over, try again!") {
+      if (gameOverStatus(field) !== "Game Over, try again!") {
         gameStatus =
           activePlayer +
           " " +
-          isGameOver(field) +
+          gameOverStatus(field) +
           ", " +
           activePlayer +
           " wins!";
       } else {
-        gameStatus = isGameOver(field);
+        gameStatus = gameOverStatus(field);
       }
       setGameOver(true);
       return;
@@ -90,12 +90,12 @@ const App: React.FC = () => {
 
   return (
     <div className={`App ${gameOver ? "gameOver" : ""}`}>
-      <header className="App-header">
+      <header className="AppHeader">
         <h1>Tic Tac Toe</h1>
         <table>
           <tbody>{createTable()}</tbody>
         </table>
-        <h3 className="game-status">{gameStatusForH3()}</h3>
+        <h3 className="gameStatus">{gameStatusForH3()}</h3>
         <button className="reset" onClick={() => reset()}>
           Reset
         </button>

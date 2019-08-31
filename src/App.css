@@ -3,7 +3,7 @@
 }
 
 
-.App-header {
+.AppHeader {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -53,7 +53,7 @@
   width: 150px;
 }
 
-.game-status {
+.gameStatus {
   color: red;
   -webkit-text-stroke: 1px white;
 }

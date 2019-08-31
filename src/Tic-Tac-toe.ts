@@ -59,7 +59,20 @@ function doesPlayerOwnsDiognale(field: GridItem[]):boolean{
     return false;
 }
 
-export function isGameOver(field:GridItem[]): any{
+export function isGameOver(field:GridItem[]): boolean{
+    if(doesPlayerOwnsRow(field)||doesPlayerOwnsCollumn(field)||doesPlayerOwnsDiognale(field)){
+        return true;
+    }
+
+    if(field.every( v => v.value !== '')){
+      return true
+    }
+    
+    return false;
+}
+
+
+export function gameOverStatus(field:GridItem[]): any{
     if(doesPlayerOwnsRow(field)){
         return 'Player owns row';
     }else if(doesPlayerOwnsCollumn(field)){
