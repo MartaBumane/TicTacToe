@@ -1,5 +1,1 @@
-export interface GridItem {
-    value: string;
-    isClicked : boolean; 
-  }
-  
+export type XO = "X" | "O" | ""

@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import "./App.css";
-import { isGameOver, grid, changePlayer, setDisability, gameOverStatus} from "./Tic-Tac-toe";
-import { GridItem } from "./interface";
+import {
+  isGameOver,
+  grid,
+  changePlayer,
+  setDisability,
+  gameOverStatus
+} from "./Tic-Tac-toe";
+import { XO } from "./interface";
 
-let activePlayer = "O";
+let activePlayer: XO = "O";
 let gameStatus = "";
 
 const App: React.FC = () => {
-  const [field, setField] = useState<GridItem[]>(grid);
+  const [field, setField] = useState<XO[]>(grid);
   const [gameOver, setGameOver] = useState<boolean>(false);
 
   const reset = (): any => {
-    let cleanedGrid: GridItem[] = [];
+    let cleanedGrid: XO[] = [];
     for (let i = 1; i <= 9; i++) {
-      cleanedGrid.push({ value: "", isClicked: false });
+      cleanedGrid.push("");
     }
     setField(cleanedGrid);
     setGameOver(false);
@@ -21,15 +27,13 @@ const App: React.FC = () => {
   };
 
   if (gameOver) {
-    for (let i = 0; i < field.length; i++) {
-      field[i].isClicked = true;
-    }
+    for (let i = 0; i < field.length; i++) { }
   }
 
   function buttonClass(j: number): any {
-    if (field[j].isClicked) {
-      if (field[j].value === "o" || field[j].value === "O") return "O";
-      if (field[j].value === "x" || field[j].value === "X") {
+    if (setDisability(field, j)) {
+      if (field[j] === "O") return "O";
+      if (field[j] === "X") {
         return "X";
       } else {
         return "button";
@@ -40,9 +44,9 @@ const App: React.FC = () => {
   }
 
   function changeStatus(j: number): void {
-    field[j].isClicked = true;
+    setDisability(field, j);
     activePlayer = changePlayer(activePlayer);
-    field[j].value = activePlayer;
+    field[j] = activePlayer;
     setField([...field]);
 
     if (isGameOver(field)) {
@@ -71,11 +75,11 @@ const App: React.FC = () => {
         children.push(
           <td key={`${i}${j}`} className="grid">
             <button
-              disabled={setDisability(field, j)}
+              disabled={gameOver ? true : setDisability(field, j)}
               onClick={() => changeStatus(j)}
               className={buttonClass(j)}
             >
-              {field[j].value}
+              {field[j]}
             </button>
           </td>
         );
