@@ -60,8 +60,4 @@ describe('TicTacToe', () => {
 
         expect(result).toEqual(true);
     });
-
-
-
-
 })

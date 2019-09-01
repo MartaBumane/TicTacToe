@@ -26,10 +26,6 @@ const App: React.FC = () => {
     gameStatus = "";
   };
 
-  if (gameOver) {
-    for (let i = 0; i < field.length; i++) { }
-  }
-
   function buttonClass(j: number): any {
     if (setDisability(field, j)) {
       if (field[j] === "O") return "O";
