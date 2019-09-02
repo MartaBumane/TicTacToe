@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Go and try App:
+
+https://app.netlify.com/sites/objective-elion-3dd6bc/settings/general
+
 ## Available Scripts
 
 In the project directory, you can run:
