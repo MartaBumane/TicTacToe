@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Go and try App:
 
-https://app.netlify.com/sites/objective-elion-3dd6bc/settings/general
+https://objective-elion-3dd6bc.netlify.com/
 
 ## Available Scripts
 
